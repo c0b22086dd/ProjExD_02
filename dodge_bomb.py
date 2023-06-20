@@ -1,4 +1,5 @@
 import random
+import time
 import sys
 import pygame as pg
 
@@ -8,7 +9,7 @@ delta = {
     pg.K_UP: (0, -5),
     pg.K_DOWN: (0, +5),
     pg.K_LEFT: (-5, 0),
-    pg.K_RIGHT: (+5, 0),
+    pg.K_RIGHT: (+5, 0)
 }
 
 
@@ -31,6 +32,7 @@ def main():
     screen = pg.display.set_mode((WIDTH, HEIGHT))
     bg_img = pg.image.load("ex02/fig/pg_bg.jpg")
     kk_img = pg.image.load("ex02/fig/3.png")
+    ckk_img = pg.image.load("ex02/fig/8.png")
     kk_img = pg.transform.rotozoom(kk_img, 0, 2.0)
     # こうかとんSurface（kk_img）からこうかとんRect（kk_rct）を抽出する
     kk_rct = kk_img.get_rect()
@@ -55,9 +57,10 @@ def main():
             if event.type == pg.QUIT: 
                 return
 
-        
         if kk_rct.colliderect(bd_rct):  # 練習５
             print("ゲームオーバー")
+            kk_img = ckk_img
+            time.sleep(3)
             return   # ゲームオーバー 
         
         for r in range(1, 11):
