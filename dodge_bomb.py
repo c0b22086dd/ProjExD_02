@@ -13,13 +13,14 @@ def main():
     kk_img = pg.image.load("ex02/fig/3.png")
     kk_img = pg.transform.rotozoom(kk_img, 0, 2.0)
     bd_img = pg.Surface((20, 20))  #練習1
-    pg.draw.circle(bd_img, (255, 0, 0), (10, 10), 10)
     bd_img.set_colorkey((0, 0, 0))
+    pg.draw.circle(bd_img, (255, 0, 0), (10, 10), 10)
     x = random.randint(0, WIDTH)
     y = random.randint(0, HEIGHT)
-    bd_rect = bg_img.get_rect()
-    bd_rect.center = x, y  #爆弾rectの中心座標を乱数で指定
-    
+    bd_rct = bg_img.get_rect()
+    bd_rct.center = x, y  #爆弾rectの中心座標を乱数で指定
+    vx, vy = +5, +5  #練習2
+
     clock = pg.time.Clock()
     tmr = 0
 
@@ -30,10 +31,11 @@ def main():
 
         screen.blit(bg_img, [0, 0])
         screen.blit(kk_img, [900, 400])
-        screen.blit(bd_img, bd_rect)
+        bd_rct.move_ip(vx, vy)
+        screen.blit(bd_img, bd_rct)
         pg.display.update()
         tmr += 1
-        clock.tick(10)
+        clock.tick(50)
 
 
 if __name__ == "__main__":
